@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Yazılım Bilimi</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+   
+</head>
+
+<body>
+    <div id="app1">
+        <h1 ref="heading"> {{ title }} </h1>
+        <button v-on:click="show" ref="myButton"> Paragrafı Göster</button>
+        <!-- <p v-if="showPragraph">Her zaman göremeyebiliriz!!</p> -->
+    </div>
+    <div id="app2">
+        <h1 ref="heading"> {{ title }} </h1>
+        <button @click="changeTitle" >Değiştir..</button>
+        
+    </div>
+    <script>
+        var data = {
+            title:'VueJS Instance',
+            showParagraph: false
+
+        }
+        var vm1 = new Vue({
+            el:"#app1",
+            data: data,
+            methods: {
+                show: function() {
+                    this.showParagraph = true;
+                    this.updateTitle('VueJS Instance (Güncellendi)');
+                },
+                updateTitle: function(title){
+                    this.title = title;
+                }
+            },
+            computed: {
+                lowercaseTitle: function() {
+                    return this.title.toLowerCase();
+                }
+
+            },
+            watch: {
+                title: function(value) {
+                    alert('Title değişti,yeni değer :' + value );
+                }
+            },
+        })
+
+        vm1.newProperty = "Test!";
+        console.log(vm1);
+        console.log(vm1.$data === data);
+
+        setTimeout(function(){
+            vm1.title = "Timer tarafından değiştirildi!!!"
+            vm1.show()
+        },2000)
+
+
+        var vm2 = new Vue({
+            el : "#app2",
+            data: {
+                title : "Vue Instance 2"
+            },
+            methods : {
+                changeTitle : function(){
+                    vm1.title =  "inst2 tarafından değiştirildi.";
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
