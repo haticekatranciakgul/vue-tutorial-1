@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Yazılım Bilimi</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="showAlert('alert')">Alert Göster</button>
+        <button v-on:click="counter++">Arttır</button>
+        <button v-on:click="counter+=2">2 Arttır</button>
+        <p> {{ counter > 10 ? " Counter 10'dan büyüktür. " : "Counter 10'dan küçüktür!!" }}</p>
+        <button v-on:click="increaseCounter(3,$event)">3 Arttır</button>
+        <p> {{ counter }} </p>
+        <p> {{ (counter * 10)/2 }} </p>
+        <p v-on:mousemove="updateCoords(2,$event)">Koordinatlar :  {{ x }},{{ y }}
+            <span v-on:mousemove.stop> GİZLİ BÖLME </span>
+        </p>
+        <input type="text" v-on:keyup.enter.space="showAlert">
+    </div>
+
+    <script>
+       new Vue({
+        el: "#app",
+        data: {
+            counter : 0,
+            x :0,
+            y :0
+        },
+        methods: {
+            showAlert : function(name){
+            alert(name);
+            },
+            increaseCounter : function(step){
+            this.counter+= step;
+            },
+            updateCoords:function(step, event){
+                this.counter+= step;
+                this.x = event.clientX;
+                this.y = event.clientY;
+            },
+            showAlert2 : function(event){
+                alert(event.target.value);
+
+            }
+        }
+        })
+    </script>
+
+</body>
+
+</html>

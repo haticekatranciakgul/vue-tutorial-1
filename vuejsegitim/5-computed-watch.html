@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Yazılım Bilimi</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="counter++">Arttır</button>
+        <button v-on:click="counter--">Azalt</button>
+        <button v-on:click="secondCounter++">2. Counter'ı arttır.</button>
+        <p> Counter : {{ counter }} | {{ secondCounter }} </p>
+        <p> {{ result() }} | {{ output }} </p>
+
+    </div>
+
+    <script>
+    
+        new Vue({
+            el: "#app",
+            data: {
+                counter: 0,
+                secondCounter :0,
+            },
+            methods : {
+                result : function(){
+                    console.log("Method çalıştı")
+                   return this.counter > 10 ? "10'dan büyüktür" : "10'dan küçüktür."
+
+                },
+            },
+            computed: { 
+                output : function(){
+                    console.log("Computed Çalıştı...")
+                    return this.counter > 10 ? "10'dan büyüktür" : "10'dan küçüktür."
+                }
+            },
+            watch : {
+                counter : function(value){
+                    vm = this;
+                    setTimeout(function(){
+                        vm.counter = 0;
+                    },
+                    1500)
+
+                }
+            }
+
+           
+        })
+    </script>
+
+</body>
+
+</html>
